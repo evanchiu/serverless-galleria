@@ -1,14 +1,14 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: Replicates S3 objects to configured bucket
+Description: Transforms images by applying sepia tone
 Resources:
-  replicateFunction:
+  transform:
     Type: AWS::Serverless::Function
     Properties:
-      Description: Replicates S3 objects to configured bucket
+      Description: Transforms images by applying sepia tone
       Handler: src/index.handler
       Runtime: nodejs6.10
-      CodeUri: build/sepia.zip
+      CodeUri: build/transform.zip
       Policies:
         - S3ReadPolicy:
             BucketName:
@@ -36,7 +36,7 @@ Resources:
 Parameters:
   sourceBucket:
     Type: String
-    Description: Name of the S3 Bucket to replicate out of (must NOT exist prior to deployment)
+    Description: Name of the S3 Bucket to read source images from (must NOT exist prior to deployment)
   destBucket:
     Type: String
-    Description: Name of the S3 Bucket to replicate into (must exist prior to deployment)
+    Description: Name of the S3 Bucket to put transformed images into (must exist prior to deployment)

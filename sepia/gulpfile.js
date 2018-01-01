@@ -18,7 +18,7 @@ gulp.task('zip', function() {
     'node_modules/**/*.json'
   ];
   gulp.src(paths, { base: '.' })
-    .pipe(zip('sepia.zip'))
+    .pipe(zip('transform.zip'))
     .pipe(gulp.dest('build'));
 });
 
