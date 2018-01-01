@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# CloudFormation packaged templates
+packaged-template.yml
