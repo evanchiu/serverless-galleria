@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Replicates S3 objects to configured bucket
+Resources:
+  replicateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Replicates S3 objects to configured bucket
+      Handler: src/index.handler
+      Runtime: nodejs6.10
+      CodeUri: build/transform.zip
+      Policies:
+        - S3ReadPolicy:
+            BucketName:
+              Ref: sourceBucket
+        - S3CrudPolicy:
+            BucketName:
+              Ref: destBucket
+      Timeout: 60
+      Events:
+        upload:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: source
+            Events: s3:ObjectCreated:*
+      Environment:
+        Variables:
+          DEST_BUCKET:
+            Ref: destBucket
+          BLUR_RADIUS:
+            Ref: blurRadius
+  source:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Ref: sourceBucket
+Parameters:
+  sourceBucket:
+    Type: String
+    Description: Name of the S3 Bucket to replicate out of (must NOT exist prior to deployment)
+  destBucket:
+    Type: String
+    Description: Name of the S3 Bucket to replicate into (must exist prior to deployment)
+  blurRadius:
+    Type: Number
+    Description: Pixel radius of the Gaussian blur to apply
+    Default: 10
