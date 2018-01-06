@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Uploader</title>
+  <style>
+    .aligner {
+      text-align: center;
+    }
+    #drop {
+      height: 300px;
+      line-height: 300px;
+      width: 300px;
+      border-radius: 150px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #f60;
+      color: #fff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="aligner">
+    <div id="drop"><h2>Drop files here!</h2></div>
+    <div id="list">
+      <h2>Uploaded Files:</h2>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    let drop = document.getElementById('drop');
+    let list = document.getElementById('list');
+    let uploadBaseUrl = 'api/file/';
+
+    // Do nothing on drag events
+    function cancel(e) {
+      e.preventDefault();
+      return false;
+    }
+
+    // Upload on drop events
+    function handleDrop(e) {
+      e.preventDefault();
+      let dt    = e.dataTransfer;
+      let files = dt.files;
+      for (let i = 0; i<files.length; i++) {
+        let file = files[i];
+        let reader = new FileReader();
+        reader.addEventListener('loadend', function(e){
+          fetch(uploadBaseUrl + file.name, {
+            method: "POST",
+            body: new Blob([reader.result], {type: file.type})
+          })
+          .then(function(){
+            let uploadedFileNode = document.createElement('div');
+            uploadedFileNode.innerHTML = file.name;
+            list.appendChild(uploadedFileNode);
+          });
+        });
+        reader.readAsArrayBuffer(file);
+      }
+      return false;
+    }
+
+    // Listen to events
+    drop.addEventListener('dragenter', cancel);
+    drop.addEventListener('dragover', cancel);
+    drop.addEventListener('drop', handleDrop);
+  </script>
+</body>
+<!-- Based on https://www.netlify.com/blog/2016/11/17/serverless-file-uploads/ -->
+</html>
