@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless photo gallery
+Resources:
+  galleria:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Serverless photo gallery
+      Handler: src/index.handler
+      Runtime: nodejs6.10
+      CodeUri: build/package.zip
+      Policies:
+        - S3ReadPolicy:
+            BucketName:
+              Ref: thumbBucket
+        - S3ReadPolicy:
+            BucketName:
+              Ref: fullBucket
+      Timeout: 60
+      Events:
+        root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        getProxy:
+          Type: Api
+          Properties:
+            Path: '/{proxy+}'
+            Method: get
+      Environment:
+        Variables:
+          THUMB_BUCKET:
+            Ref: thumbBucket
+          FULL_BUCKET:
+            Ref: fullBucket
+Parameters:
+  thumbBucket:
+    Type: String
+    Description: Name of the S3 Bucket from which to read the thumbnails (must exist prior to deployment)
+  fullBucket:
+    Type: String
+    Description: Name of the S3 Bucket from which to read the full size images (must exist prior to deployment)
