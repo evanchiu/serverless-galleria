@@ -55,7 +55,7 @@ function servePublic(event, context, lambdaCallback) {
   // Set urlPath
   let urlPath;
   if (event.path === '/') {
-    urlPath = '/index.html';
+    return serveIndex(event, context, lambdaCallback);
   } else {
     urlPath = event.path;
   }
@@ -93,6 +93,48 @@ function servePublic(event, context, lambdaCallback) {
   });
 }
 
+function serveIndex(event, context, lambdaCallback) {
+  const filePath = path.join(process.env.LAMBDA_TASK_ROOT, 'public', 'index.template.html');
+  const thumbBaseUrl = 'https://' + event.headers.Host + '/api/thumb/';
+  const fullBaseUrl = 'https://' + event.headers.Host + '/api/full/';
+
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
+      console.log('Failed to load template: ' + filePath);
+      return done(500, '{"message":"internal server error"}', 'application/json', lambdaCallback);
+    }
+    list(thumbBucket)
+      .then((contents) => {
+        let html = '';
+        for (let i = 0; i < contents.length; i++) {
+          html += '<div class="grid-item item animate-box" data-animate-effect="fadeIn">\n';
+          html += '  <a href="' + fullBaseUrl + contents[i].Key + '">\n';
+          html += '    <div class="img-wrap">\n';
+          html += '      <img src="' + thumbBaseUrl + contents[i].Key + '" alt="" class="img-responsive">\n';
+          html += '    </div>\n';
+          html += '    <div class="text-wrap">\n';
+          html += '      <div class="text-inner">\n';
+          html += '        <div>\n';
+          html += '          <h2>Name of photo or title here</h2>\n';
+          html += '          <span>72 photos</span>\n';
+          html += '        </div>\n';
+          html += '      </div>\n';
+          html += '    </div>\n';
+          html += '  </a>\n';
+          html += '</div>\n';
+        }
+
+        let output = data.toString().replace('{{photos}}', html);
+
+        return done(200, output, 'text/html', lambdaCallback);
+      })
+      .catch((error) => {
+        console.error(error);
+        done(500, '{"message":"internal server error"}', 'application/json', lambdaCallback);
+      });
+  });
+}
+
 // We're done with this lambda, return to the client with given parameters
 function done(statusCode, body, contentType, lambdaCallback, isBase64Encoded = false) {
   lambdaCallback(null, {
@@ -117,6 +159,24 @@ function get(srcBucket, srcKey) {
         return reject(err);
       } else {
         resolve(data.Body);
+      }
+    });
+  });
+}
+
+// Create a promise to get the list of files from an S3 Bucket
+// TODO Pagination - this only grabs the first 1000
+// See https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjectsV2-property
+function list(bucket) {
+  return new Promise((resolve, reject) => {
+    s3.listObjectsV2({
+      Bucket: bucket
+    }, (err, data) => {
+      if (err) {
+        console.error('Error listing objects: ' + bucket);
+        return reject(err);
+      } else {
+        resolve(data.Contents);
       }
     });
   });
