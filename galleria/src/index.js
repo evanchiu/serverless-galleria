@@ -112,14 +112,6 @@ function serveIndex(event, context, lambdaCallback) {
           html += '    <div class="img-wrap">\n';
           html += '      <img src="' + thumbBaseUrl + contents[i].Key + '" alt="" class="img-responsive">\n';
           html += '    </div>\n';
-          html += '    <div class="text-wrap">\n';
-          html += '      <div class="text-inner">\n';
-          html += '        <div>\n';
-          html += '          <h2>Name of photo or title here</h2>\n';
-          html += '          <span>72 photos</span>\n';
-          html += '        </div>\n';
-          html += '      </div>\n';
-          html += '    </div>\n';
           html += '  </a>\n';
           html += '</div>\n';
         }
