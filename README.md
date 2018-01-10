@@ -6,8 +6,9 @@ Serverless batch photo manipulation and publishing
 * [uploader](uploader) - Serverless web application for uploading images to S3
 
 ## Transformations
-* [sepia](sepia) - Apply sepia tone
 * [blur](blur) - Apply a configurable Gaussian blur
+* [resize](resize) - Apply a configurable resize
+* [sepia](sepia) - Apply sepia tone
 
 ## Galleria
 * [galleria](galleria) - Beautiful web interface for displaying photo gallery
