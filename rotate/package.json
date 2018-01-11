@@ -1,0 +1,36 @@
+{
+  "name": "rotate",
+  "version": "1.0.0",
+  "description": "rotate transformation for Serverless Galleria",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "node_modules/gulp/bin/gulp.js",
+    "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
+    "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-rotate-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET rotateDegrees=$ROTATE_DEGREES backgroundColor=\"$BACKGROUND_COLOR\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanchiu/serverless-galleria.git"
+  },
+  "keywords": [
+    "Image",
+    "ImageMagick",
+    "Rotate",
+    "Serverless"
+  ],
+  "author": "Evan Chiu <evan@evanchiu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evanchiu/serverless-galleria/issues"
+  },
+  "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
+  "dependencies": {
+    "gm": "^1.23.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.1.0",
+    "gulp-zip": "^4.1.0",
+    "jshint": "^2.9.5"
+  }
+}

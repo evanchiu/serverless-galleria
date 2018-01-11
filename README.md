@@ -9,6 +9,7 @@ Serverless batch photo manipulation and publishing
 * [blur](blur) - Apply a configurable Gaussian blur
 * [compress](compress) - Apply image compression to reduce image file size
 * [resize](resize) - Apply a configurable resize
+* [rotate](rotate) - Apply a configurable rotation with configurable background color
 * [sepia](sepia) - Apply sepia tone
 
 ## Galleria
