@@ -7,6 +7,7 @@ Serverless batch photo manipulation and publishing
 
 ## Transformations
 * [blur](blur) - Apply a configurable Gaussian blur
+* [compress](compress) - Apply image compression to reduce image file size
 * [resize](resize) - Apply a configurable resize
 * [sepia](sepia) - Apply sepia tone
 
