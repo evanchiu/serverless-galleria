@@ -48,7 +48,7 @@ First, plan your pipeline, as you'll build it backwards.  Here's a sample:
         1. (You can also set up [custom domain name](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html))
     1. Open the invocation url in your browser, and drag photos on to the drop point to upload
 1. View galleria
-    1. Find the invocation url for the galleria API, open it in your browser
+    1. Set up a [custom domain name](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) for the galleria API, then open it in your browser
 
 ## License
 &copy; 2017-2018 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
