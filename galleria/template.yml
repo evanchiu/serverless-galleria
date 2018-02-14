@@ -9,6 +9,7 @@ Resources:
       Handler: src/index.handler
       Runtime: nodejs6.10
       CodeUri: build/package.zip
+      MemorySize: 1536
       Policies:
         - S3ReadPolicy:
             BucketName:

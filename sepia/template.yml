@@ -9,6 +9,7 @@ Resources:
       Handler: src/index.handler
       Runtime: nodejs6.10
       CodeUri: build/transform.zip
+      MemorySize: 1536
       Policies:
         - S3ReadPolicy:
             BucketName:
@@ -16,7 +17,7 @@ Resources:
         - S3CrudPolicy:
             BucketName:
               Ref: destBucket
-      Timeout: 10
+      Timeout: 300
       Events:
         upload:
           Type: S3
