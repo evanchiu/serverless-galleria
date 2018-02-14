@@ -1,12 +1,12 @@
 {
-  "name": "sg-sepia",
+  "name": "sepia",
   "version": "1.0.0",
   "description": "Sepia transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {
     "build": "node_modules/gulp/bin/gulp.js",
     "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
-    "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-sg-sepia-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET"
+    "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-sepia-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET"
   },
   "repository": {
     "type": "git",

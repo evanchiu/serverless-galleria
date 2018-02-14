@@ -1,12 +1,12 @@
 {
-  "name": "sg-blur",
+  "name": "blur",
   "version": "1.0.0",
   "description": "Blur transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {
     "build": "node_modules/gulp/bin/gulp.js",
     "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
-    "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-sg-blur-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET blurRadius=$BLUR_RADIUS"
+    "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-blur-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET blurRadius=$BLUR_RADIUS"
   },
   "repository": {
     "type": "git",
