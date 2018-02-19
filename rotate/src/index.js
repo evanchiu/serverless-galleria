@@ -26,7 +26,12 @@ exports.handler = function main(event, context) {
 
   Promise.all(tasks)
     .then(() => { context.succeed(); })
-    .catch((err) => { context.fail(err); });
+    .catch((err) => {
+      console.error('failed');
+      console.error(JSON.stringify(event));
+      console.error(JSON.stringify(context));
+      context.fail(err);
+    });
 };
 
 function conversionPromise(record, destBucket) {
@@ -90,13 +95,28 @@ function put(destBucket, destKey, data) {
 
 function rotate(inBuffer) {
   return new Promise((resolve, reject) => {
-    gm(inBuffer).rotate(backgroundColor, rotateDegrees).toBuffer('JPG', (err, outBuffer) => {
-      if (err) {
-        console.error('Error applying rotate');
-        return reject(err);
-      } else {
-        resolve(outBuffer);
-      }
+    const data = gm(inBuffer).rotate(backgroundColor, rotateDegrees);
+    gmToBuffer(data).then(outBuffer => {
+      resolve(outBuffer);
+    })
+    .catch((err) => {
+      console.error('Error applying rotate');
+      return reject(err);
+    });
+  });
+}
+
+// From jescalan on https://github.com/aheckmann/gm/issues/572
+function gmToBuffer (data) {
+  return new Promise((resolve, reject) => {
+    data.stream((err, stdout, stderr) => {
+      if (err) { return reject(err); }
+      const chunks = [];
+      stdout.on('data', (chunk) => { chunks.push(chunk); });
+      // these are 'once' because they can and do fire multiple times for multiple errors,
+      // but this is a promise so you'll have to deal with them one at a time
+      stdout.once('end', () => { resolve(Buffer.concat(chunks)); });
+      stderr.once('data', (data) => { reject(String(data)); });
     });
   });
 }
