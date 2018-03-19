@@ -94,9 +94,14 @@ function servePublic(event, context, lambdaCallback) {
 }
 
 function serveIndex(event, context, lambdaCallback) {
+  // Determine base path on whether the API Gateway stage is in the path or not
+  let base_path = '/';
+  if (event.requestContext.path.startsWith('/' + event.requestContext.stage)) {
+    base_path = '/' + event.requestContext.stage + '/';
+  }
   const filePath = path.join(process.env.LAMBDA_TASK_ROOT, 'public', 'index.template.html');
-  const thumbBaseUrl = 'https://' + event.headers.Host + '/api/thumb/';
-  const fullBaseUrl = 'https://' + event.headers.Host + '/api/full/';
+  const thumbBaseUrl = 'https://' + event.headers.Host + base_path + 'api/thumb/';
+  const fullBaseUrl = 'https://' + event.headers.Host + base_path + 'api/full/';
 
   fs.readFile(filePath, function(err, data) {
     if (err) {
