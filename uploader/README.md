@@ -23,7 +23,7 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 
 ## Deploy from the AWS Serverless Application Repository
 * Create the code and destination buckets
-* Hit "Deploy" from the [application](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~sg-blur) page
+* Hit "Deploy" from the [application](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~uploader) page
 
 ## Use
 * Go to [API Gateway](https://console.aws.amazon.com/apigateway/home) in the AWS Console to find the invoke URL and open it in your browser.
