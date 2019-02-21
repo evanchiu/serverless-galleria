@@ -52,10 +52,14 @@
             method: "POST",
             body: new Blob([reader.result], {type: file.type})
           })
-          .then(function(){
-            let uploadedFileNode = document.createElement('div');
-            uploadedFileNode.innerHTML = file.name;
-            list.appendChild(uploadedFileNode);
+          .then((response) => {
+            if (response.ok) {
+              let uploadedFileNode = document.createElement('div');
+              uploadedFileNode.innerHTML = file.name;
+              list.appendChild(uploadedFileNode);
+            } else {
+              alert('Error uploading [' + file.name + ']. Max upload size is ~4MB.');
+            }
           });
         });
         reader.readAsArrayBuffer(file);
