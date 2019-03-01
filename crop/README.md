@@ -1,4 +1,4 @@
-# resize
+# crop
 
 Copy and crop images using Lambda.
 
@@ -10,7 +10,7 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 * Run `aws configure` to put store that user's credentials in `~/.aws/credentials`
 * Create an S3 bucket for storing the Lambda code and store its name in a shell variable with:
   * `export CODE_BUCKET=bucket`
-* Create the S3 bucket for the resized output, store its name in shell variable:
+* Create the S3 bucket for the cropped output, store its name in shell variable:
   * `export DEST_BUCKET=bucket`
 * Choose a name, but do NOT create the S3 bucket input comes from, store its name in shell variable:
   * `export SOURCE_BUCKET=bucket`
@@ -40,7 +40,7 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 
 ## Links
 * [serverless-galleria](https://github.com/evanchiu/serverless-galleria) on Github
-* [resize](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~crop) on the AWS Serverless Application Repository
+* [crop](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~crop) on the AWS Serverless Application Repository
 
 ## License
 &copy; 2017-2018 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
