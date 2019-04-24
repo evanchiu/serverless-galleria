@@ -1,6 +1,6 @@
 {
   "name": "blur",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Blur transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {

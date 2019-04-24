@@ -7,7 +7,7 @@ Resources:
     Properties:
       Description: Transforms images by compression to a configured quality level
       Handler: src/index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: build/transform.zip
       MemorySize: 1536
       Policies:

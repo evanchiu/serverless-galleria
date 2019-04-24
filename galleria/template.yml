@@ -1,13 +1,19 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Description: Serverless photo gallery
+
+Globals:
+  Api:
+    BinaryMediaTypes:
+      - '*~1*'
+
 Resources:
   galleria:
     Type: AWS::Serverless::Function
     Properties:
       Description: Serverless photo gallery
       Handler: src/index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: build/package.zip
       MemorySize: 1536
       Policies:

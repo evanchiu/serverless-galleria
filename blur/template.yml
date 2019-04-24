@@ -7,7 +7,7 @@ Resources:
     Properties:
       Description: Transforms images by applying blur of a configured radius
       Handler: src/index.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       CodeUri: build/transform.zip
       MemorySize: 1536
       Policies:

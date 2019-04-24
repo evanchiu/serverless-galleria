@@ -17,4 +17,4 @@ This application is designed to be used as a [serverless-galleria](https://githu
 * [sepia](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~sepia) on the AWS Serverless Application Repository
 
 ## License
-&copy; 2017-2018 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2019 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.

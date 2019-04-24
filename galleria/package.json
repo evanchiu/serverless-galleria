@@ -1,6 +1,6 @@
 {
   "name": "galleria",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Serverless photo gallery",
   "main": "src/index.js",
   "scripts": {

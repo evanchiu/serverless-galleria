@@ -1,6 +1,6 @@
 {
   "name": "sepia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sepia transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {
