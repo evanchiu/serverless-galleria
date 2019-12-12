@@ -18,10 +18,10 @@ gulp.task('zip', function() {
     'node_modules/mime-types/**',
     'node_modules/mime-db/**'
   ];
-  gulp.src(paths, { base: '.' })
+  return gulp.src(paths, { base: '.' })
     .pipe(zip('package.zip'))
     .pipe(gulp.dest('build'));
 });
 
 // default runs lint, then packages the code into the build directory
-gulp.task('default', ['lint', 'zip']);
+gulp.task('default', gulp.series('lint', 'zip'));

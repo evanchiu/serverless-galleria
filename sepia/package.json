@@ -1,6 +1,6 @@
 {
   "name": "sepia",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Sepia transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {
@@ -27,9 +27,9 @@
     "gm": "^1.23.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
     "gulp-zip": "^4.1.0",
-    "jshint": "^2.9.5"
+    "jshint": "^2.10.3"
   }
 }

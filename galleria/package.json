@@ -1,6 +1,6 @@
 {
   "name": "galleria",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Serverless photo gallery",
   "main": "src/index.js",
   "scripts": {
@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
     "gulp-zip": "^4.1.0",
-    "jshint": "^2.9.5"
+    "jshint": "^2.10.3"
   },
   "dependencies": {
     "mime-types": "^2.1.17"

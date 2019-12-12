@@ -13,7 +13,7 @@ Resources:
     Properties:
       Description: Serverless photo gallery
       Handler: src/index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       CodeUri: build/package.zip
       MemorySize: 1536
       Policies:
