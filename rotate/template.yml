@@ -7,7 +7,7 @@ Resources:
     Properties:
       Description: Transforms images by rotating a configured degree
       Handler: src/index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       CodeUri: build/transform.zip
       MemorySize: 1536
       Policies:

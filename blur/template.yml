@@ -7,7 +7,7 @@ Resources:
     Properties:
       Description: Transforms images by applying blur of a configured radius
       Handler: src/index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       CodeUri: build/transform.zip
       MemorySize: 1536
       Policies:
@@ -45,5 +45,5 @@ Parameters:
     Description: Name of the S3 Bucket to put transformed images into (must exist prior to deployment)
   blurRadius:
     Type: Number
-    Description: Pixel radius of the Gaussian blur to apply
+    Description: Pixel radius of the blur to apply
     Default: 10

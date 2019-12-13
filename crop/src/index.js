@@ -1,13 +1,12 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
-const width = process.env.WIDTH;
-const height = process.env.HEIGHT;
-let x = process.env.X_COORDINATE;
-let y = process.env.Y_COORDINATE;
+const width = parseInt(process.env.WIDTH);
+const height = parseInt(process.env.HEIGHT);
+let x = parseInt(process.env.X_COORDINATE);
+let y = parseInt(process.env.Y_COORDINATE);
 
 exports.handler = function main(event, context) {
   // If x or y are missing, set to zero
@@ -95,15 +94,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function crop(inBuffer) {
-  return new Promise((resolve, reject) => {
-    gm(inBuffer).crop(width, height, x, y).toBuffer('JPG', (err, outBuffer) => {
-      if (err) {
-        console.error('Error applying crop');
-        return reject(err);
-      } else {
-        resolve(outBuffer);
-      }
-    });
-  });
+async function crop(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.crop(x, y, width, height);
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

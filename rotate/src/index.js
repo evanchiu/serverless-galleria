@@ -1,10 +1,9 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
-const rotateDegrees = process.env.ROTATE_DEGREES;
+const rotateDegrees = parseInt(process.env.ROTATE_DEGREES);
 const backgroundColor = process.env.BACKGROUND_COLOR;
 
 exports.handler = function main(event, context) {
@@ -93,30 +92,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function rotate(inBuffer) {
-  return new Promise((resolve, reject) => {
-    const data = gm(inBuffer).rotate(backgroundColor, rotateDegrees);
-    gmToBuffer(data).then(outBuffer => {
-      resolve(outBuffer);
-    })
-    .catch((err) => {
-      console.error('Error applying rotate');
-      return reject(err);
-    });
-  });
-}
-
-// From jescalan on https://github.com/aheckmann/gm/issues/572
-function gmToBuffer (data) {
-  return new Promise((resolve, reject) => {
-    data.stream((err, stdout, stderr) => {
-      if (err) { return reject(err); }
-      const chunks = [];
-      stdout.on('data', (chunk) => { chunks.push(chunk); });
-      // these are 'once' because they can and do fire multiple times for multiple errors,
-      // but this is a promise so you'll have to deal with them one at a time
-      stdout.once('end', () => { resolve(Buffer.concat(chunks)); });
-      stderr.once('data', (data) => { reject(String(data)); });
-    });
-  });
+async function rotate(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.background(jimp.cssColorToHex(backgroundColor)).rotate(rotateDegrees);
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

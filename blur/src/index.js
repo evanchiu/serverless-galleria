@@ -1,10 +1,9 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
-const blurRadius = process.env.BLUR_RADIUS;
+const blurRadius = parseInt(process.env.BLUR_RADIUS);
 
 exports.handler = function main(event, context) {
   // Fail on mising data
@@ -87,15 +86,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function blur(inBuffer) {
-  return new Promise((resolve, reject) => {
-    gm(inBuffer).blur(blurRadius).toBuffer('JPG', (err, outBuffer) => {
-      if (err) {
-        console.error('Error applying blur');
-        return reject(err);
-      } else {
-        resolve(outBuffer);
-      }
-    });
-  });
+async function blur(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.blur(blurRadius);
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

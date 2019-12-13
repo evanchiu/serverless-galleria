@@ -15,7 +15,7 @@ A transform owns an S3 bucket, which it watches for incoming files.  When files 
 
 ![transform](diagrams/transform.png)
 
-* [blur](blur) - Apply a configurable Gaussian blur
+* [blur](blur) - Apply a configurable blur
 * [compress](compress) - Apply image compression to reduce image file size
 * [crop](crop) - Apply a configurable crop
 * [resize](resize) - Apply a configurable resize

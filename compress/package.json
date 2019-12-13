@@ -1,6 +1,6 @@
 {
   "name": "compress",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Copy and compress images using Lambda",
   "main": "src/index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "dependencies": {
-    "gm": "^1.23.1"
+    "jimp": "^0.9.3"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

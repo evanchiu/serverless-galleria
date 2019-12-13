@@ -1,6 +1,6 @@
 {
   "name": "blur",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Blur transformation for Serverless Galleria",
   "main": "src/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "dependencies": {
-    "gm": "^1.23.1"
+    "jimp": "^0.9.3"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

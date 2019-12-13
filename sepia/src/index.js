@@ -1,6 +1,5 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
@@ -86,15 +85,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function sepia(inBuffer) {
-  return new Promise((resolve, reject) => {
-    gm(inBuffer).sepia().toBuffer('JPG', (err, outBuffer) => {
-      if (err) {
-        console.error('Error applying sepia');
-        return reject(err);
-      } else {
-        resolve(outBuffer);
-      }
-    });
-  });
+async function sepia(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.sepia();
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

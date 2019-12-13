@@ -5,7 +5,7 @@ const zip = require('gulp-zip');
 // Run JS Hint, fail if warnings are found
 gulp.task('lint', () => {
   return gulp.src('src/*.js')
-    .pipe(jshint())
+    .pipe(jshint({esversion: 8}))
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });

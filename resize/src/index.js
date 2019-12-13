@@ -1,15 +1,14 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
-const maxDimension = process.env.MAX_DIMENSION;
+const maxDimension = parseInt(process.env.MAX_DIMENSION);
 
 exports.handler = function main(event, context) {
   // Fail on mising data
   if (!destBucket || !maxDimension) {
-    context.fail('Error: Environment variable DEST_BUCKET missing');
+    context.fail('Error: Environment variable missing');
     return;
   }
   if (event.Records === null) {
@@ -87,30 +86,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function resize(inBuffer) {
-  return new Promise((resolve, reject) => {
-    const data = gm(inBuffer).resize(maxDimension, maxDimension);
-    gmToBuffer(data).then(outBuffer => {
-      resolve(outBuffer);
-    })
-    .catch((err) => {
-      console.error('Error applying resize');
-      return reject(err);
-    });
-  });
-}
-
-// From jescalan on https://github.com/aheckmann/gm/issues/572
-function gmToBuffer (data) {
-  return new Promise((resolve, reject) => {
-    data.stream((err, stdout, stderr) => {
-      if (err) { return reject(err); }
-      const chunks = [];
-      stdout.on('data', (chunk) => { chunks.push(chunk); });
-      // these are 'once' because they can and do fire multiple times for multiple errors,
-      // but this is a promise so you'll have to deal with them one at a time
-      stdout.once('end', () => { resolve(Buffer.concat(chunks)); });
-      stderr.once('data', (data) => { reject(String(data)); });
-    });
-  });
+async function resize(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.scaleToFit(maxDimension, maxDimension);
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

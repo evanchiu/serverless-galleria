@@ -1,10 +1,9 @@
 const aws = require('aws-sdk');
-const gm = require('gm').subClass({imageMagick: true});
-const path = require('path');
+const jimp = require('jimp');
 const s3 = new aws.S3();
 
 const destBucket = process.env.DEST_BUCKET;
-const quality = process.env.QUALITY;
+const quality = parseInt(process.env.QUALITY);
 
 exports.handler = function main(event, context) {
   // Fail on mising data
@@ -87,15 +86,8 @@ function put(destBucket, destKey, data) {
   });
 }
 
-function compress(inBuffer) {
-  return new Promise((resolve, reject) => {
-    gm(inBuffer).compress('JPEG').quality(quality).toBuffer('JPG', (err, outBuffer) => {
-      if (err) {
-        console.error('Error applying compression');
-        return reject(err);
-      } else {
-        resolve(outBuffer);
-      }
-    });
-  });
+async function compress(inBuffer) {
+  const image = await jimp.read(inBuffer);
+  image.quality(quality);
+  return image.getBufferAsync(jimp.MIME_JPEG);
 }

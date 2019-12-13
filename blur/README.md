@@ -1,6 +1,6 @@
 # blur
 
-Copy and apply a Gaussian blur to images using Lambda.
+Copy and apply a blur to images using Lambda.
 
 ## Deploy with CloudFormation
 
