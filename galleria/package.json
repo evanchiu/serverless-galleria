@@ -29,10 +29,10 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-jshint": "^2.1.0",
-    "gulp-zip": "^4.1.0",
-    "jshint": "^2.10.3"
+    "gulp-zip": "^5.1.0",
+    "jshint": "^2.12.0"
   },
   "dependencies": {
-    "mime-types": "^2.1.17"
+    "mime-types": "^2.1.30"
   }
 }
