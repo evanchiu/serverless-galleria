@@ -38,4 +38,4 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 Uploads happen in a single post.  The [lambda invocation payload limit is 6 MB](https://docs.aws.amazon.com/lambda/latest/dg/limits.html), and it gets transferred into lambda with [base64](https://en.wikipedia.org/wiki/Base64) encoding, which adds 33% overhead, in addition to the rest of the payload. The expected maximum upload size is around 4 MB.
 
 ## License
-&copy; 2017-2019 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2021 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.

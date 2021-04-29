@@ -37,4 +37,4 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 * [blur](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~blur) on the AWS Serverless Application Repository
 
 ## License
-&copy; 2017-2019 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2021 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
