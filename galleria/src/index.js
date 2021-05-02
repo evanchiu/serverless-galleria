@@ -112,13 +112,9 @@ function serveIndex(event, context, lambdaCallback) {
       .then((contents) => {
         let html = '';
         for (let i = 0; i < contents.length; i++) {
-          html += '<div class="grid-item item animate-box" data-animate-effect="fadeIn">\n';
-          html += '  <a href="' + fullBaseUrl + contents[i].Key + '">\n';
-          html += '    <div class="img-wrap">\n';
-          html += '      <img src="' + thumbBaseUrl + contents[i].Key + '" alt="" class="img-responsive">\n';
-          html += '    </div>\n';
-          html += '  </a>\n';
-          html += '</div>\n';
+          html += '<article class="thumb">\n';
+          html += `  <a href="${fullBaseUrl + contents[i].Key}" class="image"><img src="${thumbBaseUrl + contents[i].Key}" alt="" /></a>\n`;
+          html += '</article>\n';
         }
 
         let output = data.toString().replace('{{photos}}', html);
