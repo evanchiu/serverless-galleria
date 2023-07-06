@@ -13,7 +13,7 @@ Resources:
     Properties:
       Description: Serverless web application for uploading files to S3
       Handler: src/index.handler
-      Runtime: nodejs18.x
+      Runtime: nodejs16.x
       CodeUri: build/package.zip
       MemorySize: 1536
       Policies:
