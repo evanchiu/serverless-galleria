@@ -1,10 +1,12 @@
 {
   "name": "blur",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Blur transformation for Serverless Galleria",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "build": "node_modules/gulp/bin/gulp.js",
+    "lint": "eslint src",
+    "build": "./build.sh",
     "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
     "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-blur-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET blurRadius=$BLUR_RADIUS"
   },
@@ -24,12 +26,9 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "dependencies": {
-    "jimp": "^0.9.3"
+    "jimp": "^0.22.10"
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-jshint": "^2.1.0",
-    "gulp-zip": "^4.1.0",
-    "jshint": "^2.10.3"
+    "eslint": "^8.52.0"
   }
 }
