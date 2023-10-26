@@ -51,4 +51,4 @@ First, plan your pipeline, as you'll build it backwards.  Here's a sample:
     1. Set up a [custom domain name](http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html) for the galleria API, then open it in your browser
 
 ## License
-&copy; 2017-2021 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2023 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
