@@ -6,9 +6,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Transforms images by compression to a configured quality level
-      Handler: src/index.handler
-      Runtime: nodejs12.x
-      CodeUri: build/transform.zip
+      Handler: bundle.handler
+      Runtime: nodejs18.x
+      CodeUri: bundle.js
       MemorySize: 1536
       Policies:
         - S3ReadPolicy:
@@ -31,6 +31,7 @@ Resources:
             Ref: destBucket
           QUALITY:
             Ref: quality
+          NODE_OPTIONS: --enable-source-maps
   source:
     Type: AWS::S3::Bucket
     Properties:
