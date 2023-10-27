@@ -6,9 +6,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Transforms images by applying blur of a configured radius
-      Handler: src/index.handler
+      Handler: bundle.handler
       Runtime: nodejs18.x
-      CodeUri: package.zip
+      CodeUri: bundle.js
       MemorySize: 1536
       Policies:
         - S3ReadPolicy:
@@ -31,6 +31,7 @@ Resources:
             Ref: destBucket
           BLUR_RADIUS:
             Ref: blurRadius
+          NODE_OPTIONS: --enable-source-maps
   source:
     Type: AWS::S3::Bucket
     Properties:
