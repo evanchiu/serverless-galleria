@@ -1,0 +1,22 @@
+{
+  "name": "serverless-galleria",
+  "version": "1.2.0",
+  "description": "Serverless batch photo upload, manipulation, and publishing",
+  "private": true,
+  "workspaces": [
+    "blur",
+    "compress",
+    "crop",
+    "galleria",
+    "resize",
+    "rotate",
+    "sepia",
+    "serverless-galleria-util",
+    "uploader"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evan Chiu <evan@evanchiu.com>",
+  "license": "MIT"
+}
