@@ -1,12 +1,12 @@
 {
   "name": "uploader",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Serverless web application for uploading files to S3",
   "type": "module",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
-    "build": "./build.sh",
+    "build": "rollup --config && zip -r uploader.zip bundle.js public",
     "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
     "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-uploader-$USER --parameter-overrides destBucket=$DEST_BUCKET"
   },
@@ -28,9 +28,14 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "devDependencies": {
-    "eslint": "^8.51.0"
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "eslint": "^8.52.0",
+    "rollup": "^4.1.4"
   },
   "dependencies": {
-    "mime-types": "^2.1.17"
+    "mime-types": "^2.1.17",
+    "serverless-galleria-util": "1.2.0"
   }
 }

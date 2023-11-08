@@ -1,8 +1,7 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-const client = new S3Client();
 import { readFile } from "fs/promises";
 import { lookup } from "mime-types";
 import { join, resolve } from "path";
+import { done, put } from "serverless-galleria-util";
 
 const DEST_BUCKET = process.env.DEST_BUCKET;
 
@@ -106,31 +105,4 @@ async function serveIndex(event) {
     console.error("404", error);
     return done(404, '{"message":"Not Found"}');
   }
-}
-
-// We're done with this lambda, return to the client with given parameters
-function done(
-  statusCode,
-  body,
-  contentType = "application/json",
-  isBase64Encoded = false
-) {
-  return {
-    statusCode: statusCode,
-    isBase64Encoded: isBase64Encoded,
-    body: body,
-    headers: {
-      "Content-Type": contentType,
-    },
-  };
-}
-
-// Create a promise to put the data in the s3 bucket
-async function put(destBucket, destKey, data) {
-  const command = new PutObjectCommand({
-    Bucket: destBucket,
-    Key: destKey,
-    Body: data,
-  });
-  return client.send(command);
 }
