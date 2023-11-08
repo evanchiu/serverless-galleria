@@ -1,10 +1,12 @@
 {
   "name": "rotate",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "rotate transformation for Serverless Galleria",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "build": "node_modules/gulp/bin/gulp.js",
+    "lint": "eslint src",
+    "build": "rollup --config",
     "package": "aws cloudformation package --template-file template.yml --output-template-file packaged-template.yml --s3-bucket $CODE_BUCKET",
     "deploy": "aws cloudformation deploy --template-file packaged-template.yml --capabilities CAPABILITY_IAM --stack-name dev-rotate-$USER --parameter-overrides sourceBucket=$SOURCE_BUCKET destBucket=$DEST_BUCKET rotateDegrees=$ROTATE_DEGREES backgroundColor=\"$BACKGROUND_COLOR\""
   },
@@ -25,12 +27,14 @@
   },
   "homepage": "https://github.com/evanchiu/serverless-galleria#readme",
   "dependencies": {
-    "jimp": "^0.9.3"
+    "jimp": "^0.22.10",
+    "serverless-galleria-util": "1.2.0"
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-jshint": "^2.1.0",
-    "gulp-zip": "^4.1.0",
-    "jshint": "^2.10.3"
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "eslint": "^8.52.0",
+    "rollup": "^4.1.4"
   }
 }
