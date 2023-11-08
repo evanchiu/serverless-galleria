@@ -39,4 +39,4 @@ Prerequisites: [Node.js](https://nodejs.org/en/) and [AWS CLI](http://docs.aws.a
 * Theme is [photo](https://freehtml5.co/photo-free-website-template-using-bootstrap-for-photographer/) from [freehtml5.co](https://freehtml5.co)
 
 ## License
-&copy; 2017-2021 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2023 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.

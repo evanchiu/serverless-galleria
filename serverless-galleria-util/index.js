@@ -1,7 +1,8 @@
 import {
-  S3Client,
-  PutObjectCommand,
   GetObjectCommand,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client,
 } from "@aws-sdk/client-s3";
 const s3 = new S3Client();
 
@@ -49,4 +50,27 @@ export async function put(bucket, key, data) {
       Body: data,
     })
   );
+}
+
+/** List the contents of an S3 bucket (up to first 1000 items) */
+export async function list(bucket) {
+  const response = await s3.send(new ListObjectsV2Command({ Bucket: bucket }));
+  return response.Contents;
+}
+
+/** We're done with this API Gateway lambda, return to the client with given parameters */
+export function done(
+  statusCode,
+  body,
+  contentType = "application/json",
+  isBase64Encoded = false
+) {
+  return {
+    statusCode: statusCode,
+    isBase64Encoded: isBase64Encoded,
+    body: body,
+    headers: {
+      "Content-Type": contentType,
+    },
+  };
 }

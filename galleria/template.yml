@@ -12,9 +12,9 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Serverless photo gallery
-      Handler: src/index.handler
-      Runtime: nodejs12.x
-      CodeUri: build/package.zip
+      Handler: bundle.handler
+      Runtime: nodejs18.x
+      CodeUri: galleria.zip
       MemorySize: 1536
       Policies:
         - S3ReadPolicy:
