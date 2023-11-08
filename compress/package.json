@@ -1,6 +1,6 @@
 {
   "name": "compress",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Copy and compress images using Lambda",
   "type": "module",
   "main": "src/index.js",

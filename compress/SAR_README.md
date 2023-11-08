@@ -17,4 +17,4 @@ This application is designed to be used as a [serverless-galleria](https://githu
 * [compress](https://serverlessrepo.aws.amazon.com/#/applications/arn:aws:serverlessrepo:us-east-1:233054207705:applications~compress) on the AWS Serverless Application Repository
 
 ## License
-&copy; 2017-2021 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
+&copy; 2017-2023 [Evan Chiu](https://evanchiu.com). This project is available under the terms of the MIT license.
