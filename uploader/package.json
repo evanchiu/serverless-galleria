@@ -1,6 +1,6 @@
 {
   "name": "uploader",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Serverless web application for uploading files to S3",
   "type": "module",
   "main": "src/index.js",
