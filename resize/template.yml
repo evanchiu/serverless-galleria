@@ -6,15 +6,15 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Description: Transforms images by resizing to a configured max dimension
-      Handler: src/index.handler
-      Runtime: nodejs12.x
-      CodeUri: build/transform.zip
+      Handler: bundle.handler
+      Runtime: nodejs18.x
+      CodeUri: bundle.js
       MemorySize: 1536
       Policies:
         - S3ReadPolicy:
             BucketName:
               Ref: sourceBucket
-        - S3CrudPolicy:
+        - S3WritePolicy:
             BucketName:
               Ref: destBucket
       Timeout: 300
