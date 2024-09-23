@@ -33,7 +33,7 @@
     "@rollup/plugin-json": "^6.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "eslint": "^8.52.0",
-    "rollup": "^4.1.4"
+    "rollup": "^4.22.4"
   },
   "dependencies": {
     "mime-types": "^2.1.30",
